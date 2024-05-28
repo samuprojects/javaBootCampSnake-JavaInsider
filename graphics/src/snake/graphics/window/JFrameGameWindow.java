@@ -27,6 +27,7 @@ package snake.graphics.window;
 * */
 
 import javax.swing.*;
+import java.awt.*;
 
 public class JFrameGameWindow extends JFrame {
 
@@ -37,5 +38,25 @@ public class JFrameGameWindow extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    @Override
+    public void paint(Graphics g) { // o objeto Graphics passado nesse método é como se fosse a caneta de desenho
+        //g.setColor(Color.RED);
+        //g.fillRect(200, 100, 70, 70); // permite desenhar um retangulo preenchido (por padrão a tela é branca e o desenho em preto)
+
+        //g.setColor(Color.BLUE); // alterar a cor da caneta para outra cor
+        //g.fillRect(100,20, 70, 50);
+
+        //g.fillRect(0,300, 80, 80); // também será azul, pois foi a última cor definida em color
+
+        // será muito utilizado, pois é o que vai desenhar a snake (vários retângulos na tela)
+
+        // para deixar toda a tela escura usar os conceitos acima em toda a tela,
+        // ou seja, não existe uma técnica para cor de fundo, e sim pintar da cor desejada
+        // na dimensão total da tela, para dar a impressão de fundo preto.
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, 400, 400);
+
     }
 }
