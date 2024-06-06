@@ -1,5 +1,6 @@
 package snake.graphics.window;
 
+import snake.graphics.basic.Color;
 import snake.graphics.drawable.Drawable;
 
 import java.awt.*;
@@ -22,7 +23,7 @@ public class Renderer {
 
     public void render(Graphics g) {
         for (Drawable d : drawables) {
-            g.setColor(Color.GREEN); // a cor será definido posteriormente
+            g.setColor(toAwtColor(d.getColor())); // a cor será definido posteriormente
             d.draw(g); // render entrega a caneta para os drawables, pois não tem a lógica de cada um dos elementos, delega para o método draw de cada um drawables, alterando somente a cor da caneta
         }
     }
@@ -35,6 +36,16 @@ public class Renderer {
 
     public void remove(Drawable drawable) {
         drawables.remove(drawable);
+    }
+
+    // mapeamento para relacionar Color do pacote snake com Color do AWT
+    private java.awt.Color toAwtColor (Color color) {
+        return switch (color) {
+            case BLACK -> java.awt.Color.BLACK;
+            case WHITE -> java.awt.Color.WHITE;
+            case GREEN -> java.awt.Color.GREEN;
+            case RED -> java.awt.Color.RED;
+        };
     }
 }
 
