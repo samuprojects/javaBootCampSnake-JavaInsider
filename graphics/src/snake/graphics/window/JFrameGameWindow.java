@@ -34,8 +34,10 @@ import snake.graphics.drawable.Text;
 import javax.swing.*;
 import java.awt.*;
 
+@SuppressWarnings("ALL")
 public class JFrameGameWindow extends JFrame {
     private final Renderer renderer;
+    private final Rect drawingArea; // para representar a área de desenho
 
     public JFrameGameWindow(String title, int width, int height) {
         setTitle(title);
@@ -48,6 +50,9 @@ public class JFrameGameWindow extends JFrame {
         renderer.add(new Rect(20, 20, 200, 100)); // testando renderização
         renderer.add(new Text("Hello!", new Point(200, 200), Color.RED));
 
+        int upperY = height - getContentPane().getSize().height; // altura da janela - área disponível
+        drawingArea = new Rect(0, upperY, width, height - upperY); // o desenho do retângulo vai começar na coordenada upperY
+
         setVisible(true);
     }
 
@@ -55,4 +60,13 @@ public class JFrameGameWindow extends JFrame {
     public void paint(Graphics g) {
         renderer.render(g);
     }
+
+    public Rect getDrawingArea() {
+        return drawingArea;
+    }
+
+    public Renderer getRenderer() {
+        return renderer;
+    }
+
 }
