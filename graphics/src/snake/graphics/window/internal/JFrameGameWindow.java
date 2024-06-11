@@ -1,4 +1,4 @@
-package snake.graphics.window;
+package snake.graphics.window.internal;
 
 /*
 *
@@ -26,10 +26,7 @@ package snake.graphics.window;
 *
 * */
 
-import snake.graphics.basic.Color;
-import snake.graphics.basic.Point;
 import snake.graphics.drawable.Rect;
-import snake.graphics.drawable.Text;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,8 +44,6 @@ public class JFrameGameWindow extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         renderer = new Renderer();
-        renderer.add(new Rect(20, 20, 200, 100)); // testando renderização
-        renderer.add(new Text("Hello!", new Point(200, 200), Color.RED));
 
         int upperY = height - getContentPane().getSize().height; // altura da janela - área disponível
         drawingArea = new Rect(0, upperY, width, height - upperY); // o desenho do retângulo vai começar na coordenada upperY
