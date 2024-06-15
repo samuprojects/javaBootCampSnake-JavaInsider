@@ -18,6 +18,7 @@ import snake.graphics.basic.Point;
 import snake.graphics.basic.Dimension;
 
 import java.awt.*;
+import java.util.List;
 
 
 import static snake.graphics.basic.Color.BLACK;
@@ -89,5 +90,11 @@ public class Rect extends Drawable {
     @Override
     public void draw(Graphics g) {
         g.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+    }
+
+    public static void shift(List<Rect> rects) {
+        for (int i = rects.size() - 1; i >= 1; i--) {
+            rects.set(i, rects.get(i - 1));
+        }
     }
 }
