@@ -1,6 +1,6 @@
 package snake.game.scene;
 
-import snake.game.Game;
+import snake.game.core.Game;
 import snake.graphics.basic.Point;
 import snake.graphics.drawable.Text;
 
