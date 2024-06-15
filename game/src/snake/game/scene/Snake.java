@@ -40,4 +40,16 @@ public class Snake extends Shape {
         Rect newHead = duplicateRect(head, direction.point());
         rects().set(0, newHead);
     }
+
+    public void up() {
+    }
+
+    public void down() {
+    }
+
+    public void left() {
+    }
+
+    public void right() {
+    }
 }

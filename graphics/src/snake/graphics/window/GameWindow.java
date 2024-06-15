@@ -2,15 +2,20 @@ package snake.graphics.window;
 
 import snake.graphics.drawable.Drawable;
 import snake.graphics.drawable.Rect;
+import snake.graphics.handler.KeyHandler;
 import snake.graphics.window.internal.JFrameGameWindow;
+
+import java.util.function.Consumer;
 
 @SuppressWarnings("ALL")
 public class GameWindow {
 
     private final JFrameGameWindow window;
+    private final KeyHandler keyHandler;
 
     public GameWindow(String title, int width, int height) {
         this.window = new JFrameGameWindow(title, width, height);
+        keyHandler = new KeyHandler(window);
     }
 
     public void addDrawable(Drawable drawable) {
@@ -27,5 +32,9 @@ public class GameWindow {
 
     public void update() {
         window.repaint();
+    }
+
+    public void onKeyPressed(Consumer<Key> keyPressedHandler) {
+        keyHandler.defineKeyPressedHandler(keyPressedHandler);
     }
 }

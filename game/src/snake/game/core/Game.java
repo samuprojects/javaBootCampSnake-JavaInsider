@@ -24,8 +24,22 @@ public class Game {
         LOGGER.debug("Starting the game....");
         gameWindow = new GameWindow(WINDOW_TITLE, WINDOW_WIDTH, WINDOW_HEIGHT);
 
+        setupKeyPressedHandler();
         addElementsToScreen();
         startGameLoop();
+    }
+
+    private void setupKeyPressedHandler() {
+        gameWindow.onKeyPressed(k -> {
+            LOGGER.debug("Key pressed: {}", k);
+            switch (k) {
+                case UP -> snake.up();
+                case DOWN -> snake.down();
+                case LEFT -> snake.left();
+                case RIGHT -> snake.right();
+                case ESC -> System.exit(0);
+            }
+        });
     }
 
     private void addElementsToScreen() {
