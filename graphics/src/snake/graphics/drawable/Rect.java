@@ -13,7 +13,12 @@ package snake.graphics.drawable;
 *
 * */
 
+
+import snake.graphics.basic.Point;
+import snake.graphics.basic.Dimension;
+
 import java.awt.*;
+
 
 import static snake.graphics.basic.Color.BLACK;
 
@@ -34,8 +39,18 @@ public class Rect extends Drawable {
         return new Point(rectangle.x, rectangle.y);
     }
 
+    public void location(Point point) {
+        rectangle.x = point.x();
+        rectangle.y = point.y();
+    }
+
     public Dimension dimension() { // a mesma coisa para a dimensão
         return new Dimension(rectangle.width, rectangle.height);
+    }
+
+    public void location(Dimension dimension) {
+        rectangle.width = dimension.width();
+        rectangle.height = dimension.height();
     }
 
     public void dimension(int width, int height) { // método para alterar a dimensão

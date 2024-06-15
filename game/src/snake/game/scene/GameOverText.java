@@ -6,6 +6,7 @@ import snake.graphics.drawable.Text;
 
 import static snake.graphics.basic.Color.RED;
 
+@SuppressWarnings("ALL")
 public class GameOverText extends Text {
 
     public GameOverText(int score) {
