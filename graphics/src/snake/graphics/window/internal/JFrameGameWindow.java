@@ -32,8 +32,6 @@ import snake.graphics.drawable.Rect;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 @SuppressWarnings("ALL")
 public class JFrameGameWindow extends JFrame {
@@ -54,13 +52,6 @@ public class JFrameGameWindow extends JFrame {
 
         int upperY = height - getContentPane().getSize().height; // altura da janela - área disponível
         drawingArea = new Rect(0, upperY, width, height - upperY); // o desenho do retângulo vai começar na coordenada upperY
-
-        addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                LOGGER.debug("Key: " + e.getKeyCode());
-            }
-        });
     }
 
     @Override
