@@ -1,7 +1,7 @@
 package snake.game.util;
 
 @SuppressWarnings("ALL")
-public class RandomUtils {
+public final class RandomUtils {
 
     private RandomUtils() {
         throw new UnsupportedOperationException();
