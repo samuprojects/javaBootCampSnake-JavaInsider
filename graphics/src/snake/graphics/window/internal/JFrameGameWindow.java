@@ -26,13 +26,19 @@ package snake.graphics.window.internal;
 *
 * */
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import snake.graphics.drawable.Rect;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("ALL")
 public class JFrameGameWindow extends JFrame {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JFrameGameWindow.class);
+
     private final Renderer renderer;
     private final Rect drawingArea; // para representar a área de desenho
 
@@ -44,11 +50,17 @@ public class JFrameGameWindow extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         renderer = new Renderer();
+        setVisible(true);
 
         int upperY = height - getContentPane().getSize().height; // altura da janela - área disponível
         drawingArea = new Rect(0, upperY, width, height - upperY); // o desenho do retângulo vai começar na coordenada upperY
 
-        setVisible(true);
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                LOGGER.debug("Key: " + e.getKeyCode());
+            }
+        });
     }
 
     @Override

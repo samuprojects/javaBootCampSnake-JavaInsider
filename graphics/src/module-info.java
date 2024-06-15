@@ -4,4 +4,5 @@ module graphics {
     exports snake.graphics.window;
     exports snake.graphics.basic;
     exports snake.graphics.drawable;
+    requires org.slf4j;
 }
