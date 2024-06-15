@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import snake.game.scene.Background;
 import snake.game.scene.Food;
+import snake.game.scene.Snake;
 import snake.graphics.window.GameWindow;
 
 import static snake.graphics.basic.Color.BLACK;
@@ -29,6 +30,7 @@ public class Game {
                 new Background(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK)
         );
 
+        gameWindow.addDrawable(new Snake());
         gameWindow.addDrawable(new Food(gameWindow.drawingArea()));
 
         //gameWindow.addDrawable(new GameOverText(30));
