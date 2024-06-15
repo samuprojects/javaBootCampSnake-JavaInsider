@@ -7,6 +7,7 @@ package snake.graphics.drawable;
 * */
 
 import snake.graphics.basic.Color;
+import snake.graphics.basic.Point;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -50,5 +51,15 @@ public class Shape extends Drawable {
     @Override
     public void draw(Graphics g) { // fazer um draw de shape é fazer de cada um dos elementos desse shape
         rects.forEach(r -> r.draw(g)); // o professor prefere utilizar a programação funcional do Java quando possível
+    }
+
+    public Rect duplicateRect(Rect baseRect, Point direction) {
+        int baseX = baseRect.location().x();
+        int baseY = baseRect.location().y();
+        int baseWidth = baseRect.dimension().width();
+        int baseHeight = baseRect.dimension().height();
+
+        Point p = new Point(baseX + direction.x() * baseWidth, baseY + direction.y() * baseHeight);
+        return new Rect(p, baseRect.dimension());
     }
 }

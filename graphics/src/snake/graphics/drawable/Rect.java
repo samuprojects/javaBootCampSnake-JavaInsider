@@ -31,6 +31,10 @@ public class Rect extends Drawable {
         this.rectangle = new Rectangle(x, y, width, height);
     }
 
+    public Rect(Point point, Dimension dimension) {
+        this(point.x(), point.y(), dimension.width(), dimension.height());
+    }
+
     public Rect() {
         this(0, 0, 0, 0);
     }
