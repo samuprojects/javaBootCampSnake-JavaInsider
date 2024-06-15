@@ -25,4 +25,8 @@ public class Snake extends Shape {
             addRect(rect);
         }
     }
+
+    public void move() {
+
+    }
 }
