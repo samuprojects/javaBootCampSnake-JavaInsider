@@ -16,15 +16,17 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class Renderer {
     private final List<Drawable> drawables;
+    private final Graphics graphics;
 
-    public Renderer() { // começa com a lista vazia
+    public Renderer(Graphics graphics) { // recebendo a caneta do buffer
         drawables = new ArrayList<>();
+        this.graphics = graphics;
     }
 
-    public void render(Graphics g) {
+    public void render() { // deixa de receber parâmetros porque a classe Renderer passou a utilizar do buffer
         for (Drawable d : drawables) {
-            g.setColor(toAwtColor(d.getColor())); // a cor será definido posteriormente
-            d.draw(g); // render entrega a caneta para os drawables, pois não tem a lógica de cada um dos elementos, delega para o método draw de cada um drawables, alterando somente a cor da caneta
+            graphics.setColor(toAwtColor(d.getColor())); // a cor será definido posteriormente
+            d.draw(graphics); // render entrega a caneta para os drawables, pois não tem a lógica de cada um dos elementos, delega para o método draw de cada um drawables, alterando somente a cor da caneta
         }
     }
 

@@ -37,6 +37,8 @@ import java.awt.*;
 public class JFrameGameWindow extends JFrame {
     private static final Logger LOGGER = LoggerFactory.getLogger(JFrameGameWindow.class);
 
+    private final Image buffer;
+    private final Graphics graphics;
     private final Renderer renderer;
     private final Rect drawingArea; // para representar a área de desenho
 
@@ -46,9 +48,11 @@ public class JFrameGameWindow extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        renderer = new Renderer();
         setVisible(true);
+
+        buffer = createImage(width, height);
+        graphics = buffer.getGraphics();
+        renderer = new Renderer(graphics);
 
         int upperY = height - getContentPane().getSize().height; // altura da janela - área disponível
         drawingArea = new Rect(0, upperY, width, height - upperY); // o desenho do retângulo vai começar na coordenada upperY
@@ -56,8 +60,11 @@ public class JFrameGameWindow extends JFrame {
 
     @Override
     public void paint(Graphics g) {
-        renderer.render(g);
-        LOGGER.debug("paint()");
+        if (graphics == null || renderer == null) {
+            return;
+        }
+        renderer.render();
+        g.drawImage(buffer, 0, 0, null); // render usa a caneta da tela para desenhar a imagem do buffer completo
     }
 
     public Rect getDrawingArea() {
