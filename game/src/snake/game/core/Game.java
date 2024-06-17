@@ -56,6 +56,7 @@ public class Game {
     private void startGameLoop() {
         do {
             updateScene();
+            LOGGER.debug("gameloop()");
         } while (!isGameOver());
     }
 

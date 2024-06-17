@@ -57,6 +57,7 @@ public class JFrameGameWindow extends JFrame {
     @Override
     public void paint(Graphics g) {
         renderer.render(g);
+        LOGGER.debug("paint()");
     }
 
     public Rect getDrawingArea() {
