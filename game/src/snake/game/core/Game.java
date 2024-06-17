@@ -16,6 +16,7 @@ public class Game {
     public static final int WINDOW_WIDTH = 400;
     public static final int WINDOW_HEIGHT = 400;
     private static final String WINDOW_TITLE = "Snake!";
+    private volatile boolean running;
 
     private GameWindow gameWindow;
     private Snake snake;
@@ -25,6 +26,7 @@ public class Game {
         gameWindow = new GameWindow(WINDOW_TITLE, WINDOW_WIDTH, WINDOW_HEIGHT);
 
         setupKeyPressedHandler();
+        setupWindowClosedHandler();
         addElementsToScreen();
         startGameLoop();
     }
@@ -42,6 +44,10 @@ public class Game {
         });
     }
 
+    private void setupWindowClosedHandler(){
+        gameWindow.onWindowClosed(() -> running = false);
+    }
+
     private void addElementsToScreen() {
         gameWindow.addDrawable(
                 new Background(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK)
@@ -54,9 +60,12 @@ public class Game {
     }
 
     private void startGameLoop() {
+        running = true;
         do {
             updateScene();
         } while (!isGameOver());
+
+        LOGGER.debug("The End!");
     }
 
     private void updateScene() {
@@ -66,7 +75,7 @@ public class Game {
     }
 
     private boolean isGameOver() {
-        return false;
+        return !running;
     }
 
     private void sleep(int millis) {

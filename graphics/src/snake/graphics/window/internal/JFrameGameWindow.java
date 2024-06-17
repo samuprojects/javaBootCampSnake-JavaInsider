@@ -47,7 +47,7 @@ public class JFrameGameWindow extends JFrame {
         setSize(width, height);
         setResizable(false);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
 
         buffer = createImage(width, height);
