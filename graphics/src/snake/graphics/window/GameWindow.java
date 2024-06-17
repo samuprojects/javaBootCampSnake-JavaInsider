@@ -15,7 +15,7 @@ public class GameWindow {
 
     public GameWindow(String title, int width, int height) {
         this.window = new JFrameGameWindow(title, width, height);
-        keyHandler = new KeyHandler(window);
+        keyHandler = new KeyHandler(window, 20);
     }
 
     public void addDrawable(Drawable drawable) {
