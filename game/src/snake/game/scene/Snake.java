@@ -15,6 +15,7 @@ import static snake.graphics.basic.Color.WHITE;
 public class Snake extends Shape {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Snake.class);
+    private static final int PIECE_SIZE = 5;
 
     private Direction direction;
 
@@ -24,7 +25,7 @@ public class Snake extends Shape {
         direction = NONE;
 
         Point p = new Point(200, 100);
-        Dimension d = new Dimension(10, 10);
+        Dimension d = new Dimension(PIECE_SIZE, PIECE_SIZE);
 
         Rect rect = new Rect(p, d);
         addRect(rect);
@@ -74,6 +75,36 @@ public class Snake extends Shape {
 
         if (collided) {
             LOGGER.debug("Collided with itself!");
+        }
+
+        return collided;
+    }
+
+    public boolean collidedWithWindowBounds(Rect drawingArea) {
+        boolean collided = false;
+
+        int pieceSize = PIECE_SIZE;
+        Rect head = firstRect();
+
+        int headX = head.location().x();
+        int headY = head.location().y();
+
+        int areaX1 = drawingArea.minX();
+        int areaY1 = drawingArea.minY() - pieceSize * 2;
+
+        int areaX2 = drawingArea.maxX();
+        int areaY2 = drawingArea.maxY();
+
+        if (headX <= areaX1 || headX + pieceSize >= areaX2) {
+            collided = true;
+        }
+
+        if (headY <= areaY1 || headY + pieceSize >= areaY2) {
+            collided = true;
+        }
+
+        if (collided) {
+            LOGGER.debug("Collided with window!");
         }
 
         return collided;

@@ -81,7 +81,7 @@ public class Game {
     }
 
     private boolean isGameOver() {
-        return !running || snake.collidedWithItself();
+        return !running || snake.collidedWithItself() || snake.collidedWithWindowBounds(gameWindow.drawingArea());
     }
 
     private void processGameOver() {
