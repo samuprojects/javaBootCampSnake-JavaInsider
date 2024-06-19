@@ -17,6 +17,7 @@ public class Game {
     public static final int WINDOW_WIDTH = 400;
     public static final int WINDOW_HEIGHT = 400;
     private static final String WINDOW_TITLE = "Snake!";
+    private static final int MAX_SNAKE_SPEED = 50;
 
     private GameWindow gameWindow;
     private Snake snake;
@@ -78,7 +79,7 @@ public class Game {
         snake.move();
         food.eatIfFood(snake);
         gameWindow.update();
-        sleep(50);
+        sleep(MAX_SNAKE_SPEED - snake.speed());
     }
 
     private boolean isGameOver() {

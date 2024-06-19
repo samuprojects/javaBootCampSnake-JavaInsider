@@ -39,6 +39,7 @@ public class Food extends Rect {
             eatenTimes++;
             moveToRandomLocation(snake);
             snake.elongate();
+            snake.faster();
         }
     }
 

@@ -19,11 +19,13 @@ public class Snake extends Shape {
 
     private Direction direction;
     private int piecesToElongate;
+    private int speed;
 
     public Snake() {
         super(WHITE);
 
         direction = NONE;
+        speed = 10;
 
         Point p = new Point(200, 100);
         Dimension d = new Dimension(PIECE_SIZE, PIECE_SIZE);
@@ -58,6 +60,11 @@ public class Snake extends Shape {
     public void elongate() {
         LOGGER.debug("Elongating...");
         piecesToElongate = 5;
+    }
+
+    public void faster(){
+        speed += 5;
+        LOGGER.debug("Faster! {}", speed);
     }
 
     public void up() {
@@ -120,5 +127,9 @@ public class Snake extends Shape {
         }
 
         return collided;
+    }
+
+    public int speed() {
+        return speed;
     }
 }
