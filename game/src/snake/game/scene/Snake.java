@@ -1,5 +1,7 @@
 package snake.game.scene;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import snake.game.core.Direction;
 import snake.graphics.basic.Dimension;
 import snake.graphics.basic.Point;
@@ -11,6 +13,8 @@ import static snake.graphics.basic.Color.WHITE;
 
 @SuppressWarnings("ALL")
 public class Snake extends Shape {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Snake.class);
 
     private Direction direction;
 
@@ -61,5 +65,17 @@ public class Snake extends Shape {
     public void right() {
         if (direction.canChangeTo(RIGHT))
             direction = RIGHT;
+    }
+
+    public boolean collidedWithItself() {
+        Rect head = firstRect();
+
+        boolean collided = rects().stream().skip(1).anyMatch(r -> head.intersects(r));
+
+        if (collided) {
+            LOGGER.debug("Collided with itself!");
+        }
+
+        return collided;
     }
 }

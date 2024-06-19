@@ -75,7 +75,7 @@ public class Game {
     }
 
     private boolean isGameOver() {
-        return !running;
+        return !running || snake.collidedWithItself();
     }
 
     private void sleep(int millis) {
