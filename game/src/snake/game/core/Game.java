@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import snake.game.scene.Background;
 import snake.game.scene.Food;
+import snake.game.scene.GameOverText;
 import snake.game.scene.Snake;
 import snake.graphics.window.GameWindow;
 
@@ -16,10 +17,11 @@ public class Game {
     public static final int WINDOW_WIDTH = 400;
     public static final int WINDOW_HEIGHT = 400;
     private static final String WINDOW_TITLE = "Snake!";
-    private volatile boolean running;
 
     private GameWindow gameWindow;
     private Snake snake;
+    private Food food;
+    private volatile boolean running;
 
     public void start () {
         LOGGER.debug("Starting the game....");
@@ -55,7 +57,9 @@ public class Game {
 
         snake = new Snake();
         gameWindow.addDrawable(snake );
-        gameWindow.addDrawable(new Food(gameWindow.drawingArea()));
+
+        food = new Food(gameWindow.drawingArea());
+        gameWindow.addDrawable(food);
 
     }
 
@@ -64,6 +68,8 @@ public class Game {
         do {
             updateScene();
         } while (!isGameOver());
+
+        processGameOver();
 
         LOGGER.debug("The End!");
     }
@@ -76,6 +82,13 @@ public class Game {
 
     private boolean isGameOver() {
         return !running || snake.collidedWithItself();
+    }
+
+    private void processGameOver() {
+        gameWindow.removeDrawable(snake);
+        gameWindow.removeDrawable(food);
+        gameWindow.addDrawable(new GameOverText(10));
+        gameWindow.update();
     }
 
     private void sleep(int millis) {
