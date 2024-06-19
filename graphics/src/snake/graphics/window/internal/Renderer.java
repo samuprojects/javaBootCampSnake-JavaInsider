@@ -7,6 +7,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Collections.synchronizedList;
+
 /*
 * Classe do objeto responsável por renderizar a cena na janela
 * ele terá uma lista de drawables que é o que será renderizado
@@ -19,14 +21,16 @@ public class Renderer {
     private final Graphics graphics;
 
     public Renderer(Graphics graphics) { // recebendo a caneta do buffer
-        drawables = new ArrayList<>();
+        drawables = synchronizedList(new ArrayList<>()); // a lógica do jogo é da thread main (para add ou remover elementos da cena), a renderização é da thread swing (para desenhar), então protege com synchronizedList
         this.graphics = graphics;
     }
 
     public void render() { // deixa de receber parâmetros porque a classe Renderer passou a utilizar do buffer
-        for (Drawable d : drawables) {
-            graphics.setColor(toAwtColor(d.getColor())); // a cor será definido posteriormente
-            d.draw(graphics); // render entrega a caneta para os drawables, pois não tem a lógica de cada um dos elementos, delega para o método draw de cada um drawables, alterando somente a cor da caneta
+        synchronized (drawables) { // resolve o problema de acesso das threads main e do swing
+            for (Drawable d : drawables) {
+                graphics.setColor(toAwtColor(d.getColor())); // a cor será definido posteriormente
+                d.draw(graphics); // render entrega a caneta para os drawables, pois não tem a lógica de cada um dos elementos, delega para o método draw de cada um drawables, alterando somente a cor da caneta
+            }
         }
     }
 
