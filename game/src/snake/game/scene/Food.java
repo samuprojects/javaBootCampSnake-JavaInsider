@@ -13,27 +13,31 @@ public class Food extends Rect {
     private final Rect drawingArea;
     private int eatenTimes;
 
-    public Food(Rect drawingArea) {
+    public Food(Rect drawingArea, Snake snake) {
         this.drawingArea = drawingArea;
 
-        moveToRandomLocation();
+        moveToRandomLocation(snake);
         dimension(SIZE, SIZE);
         setColor(RED);
     }
 
-    public void moveToRandomLocation() {
+    public void moveToRandomLocation(Snake snake) {
         int distanceFromBorder = 5;
 
-        int x = random(drawingArea.minX() + distanceFromBorder, drawingArea.maxX() - SIZE - distanceFromBorder);
-        int y = random(drawingArea.minY() + distanceFromBorder, drawingArea.maxY() - SIZE - distanceFromBorder);
+        do {
 
-        location(new Point(x, y));
+            int x = random(drawingArea.minX() + distanceFromBorder, drawingArea.maxX() - SIZE - distanceFromBorder);
+            int y = random(drawingArea.minY() + distanceFromBorder, drawingArea.maxY() - SIZE - distanceFromBorder);
+
+            location(new Point(x, y));
+
+        } while (snake.intersects(this));
     }
 
     public void eatIfFood(Snake snake) {
         if (snake.intersects(this)) {
             eatenTimes++;
-            moveToRandomLocation();
+            moveToRandomLocation(snake);
         }
     }
 

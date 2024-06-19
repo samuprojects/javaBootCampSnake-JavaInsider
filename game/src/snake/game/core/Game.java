@@ -58,7 +58,7 @@ public class Game {
         snake = new Snake();
         gameWindow.addDrawable(snake );
 
-        food = new Food(gameWindow.drawingArea());
+        food = new Food(gameWindow.drawingArea(), snake);
         gameWindow.addDrawable(food);
 
     }
