@@ -18,6 +18,7 @@ public class Snake extends Shape {
     private static final int PIECE_SIZE = 5;
 
     private Direction direction;
+    private int piecesToElongate;
 
     public Snake() {
         super(WHITE);
@@ -41,11 +42,22 @@ public class Snake extends Shape {
     public void move() {
         if (direction != NONE) {
             Rect head = firstRect();
+            Rect tail = lastRect();
             Rect.shift(rects());
 
             Rect newHead = duplicateRect(head, direction.point());
             rects().set(0, newHead);
+
+            if (piecesToElongate > 0) {
+                rects().add(tail);
+                piecesToElongate--;
+            }
         }
+    }
+
+    public void elongate() {
+        LOGGER.debug("Elongating...");
+        piecesToElongate = 5;
     }
 
     public void up() {
