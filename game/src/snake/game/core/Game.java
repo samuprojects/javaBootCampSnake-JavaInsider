@@ -76,6 +76,7 @@ public class Game {
 
     private void updateScene() {
         snake.move();
+        food.eatIfFood(snake);
         gameWindow.update();
         sleep(50);
     }
@@ -87,7 +88,7 @@ public class Game {
     private void processGameOver() {
         gameWindow.removeDrawable(snake);
         gameWindow.removeDrawable(food);
-        gameWindow.addDrawable(new GameOverText(10));
+        gameWindow.addDrawable(new GameOverText(food.getEatenTimes()));
         gameWindow.update();
     }
 

@@ -11,6 +11,7 @@ public class Food extends Rect {
     private static final int SIZE = 5;
 
     private final Rect drawingArea;
+    private int eatenTimes;
 
     public Food(Rect drawingArea) {
         this.drawingArea = drawingArea;
@@ -27,6 +28,16 @@ public class Food extends Rect {
         int y = random(drawingArea.minY() + distanceFromBorder, drawingArea.maxY() - SIZE - distanceFromBorder);
 
         location(new Point(x, y));
+    }
 
+    public void eatIfFood(Snake snake) {
+        if (snake.intersects(this)) {
+            eatenTimes++;
+            moveToRandomLocation();
+        }
+    }
+
+    public int getEatenTimes() {
+        return eatenTimes;
     }
 }
