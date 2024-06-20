@@ -42,7 +42,7 @@ public class Game {
                 case DOWN -> snake.down();
                 case LEFT -> snake.left();
                 case RIGHT -> snake.right();
-                case ESC -> System.exit(0);
+                case ESC -> gameWindow.close();
             }
         });
     }

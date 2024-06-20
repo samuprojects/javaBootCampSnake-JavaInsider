@@ -44,4 +44,8 @@ public class GameWindow {
     public void onWindowClosed(Runnable windowClosedHandler) {
         windowHandler.defineWindowClosedHandler(windowClosedHandler);
     }
+
+    public void close() {
+        window.dispose();
+    }
 }
