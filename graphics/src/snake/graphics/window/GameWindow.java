@@ -1,5 +1,7 @@
 package snake.graphics.window;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import snake.graphics.drawable.Drawable;
 import snake.graphics.drawable.Rect;
 import snake.graphics.handler.KeyHandler;
@@ -10,6 +12,7 @@ import java.util.function.Consumer;
 
 @SuppressWarnings("ALL")
 public class GameWindow {
+    private static final Logger LOGGER = LoggerFactory.getLogger(GameWindow.class);
 
     private final JFrameGameWindow window;
     private final KeyHandler keyHandler;
@@ -22,10 +25,12 @@ public class GameWindow {
     }
 
     public void addDrawable(Drawable drawable) {
+        LOGGER.debug("Adding drawable: {}", drawable.getName());
         window.getRenderer().add(drawable);
     }
 
     public void removeDrawable(Drawable drawable) {
+        LOGGER.debug("Removing drawable: {}", drawable.getName());
         window.getRenderer().remove(drawable);
     }
 
