@@ -4,5 +4,8 @@
     "height": 400,
     "title": "Snake!",
     "backgroundColor": "BLACK"
+  },
+  "application": {
+    "minMillisBetweenKeyPressedEvents": 40
   }
 }

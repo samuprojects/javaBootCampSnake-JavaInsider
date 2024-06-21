@@ -29,7 +29,7 @@ public class Game {
         gameConfig = ConfigLoader.load();
         LOGGER.debug("Game config loaded: {}" + gameConfig);
 
-        gameWindow = new GameWindow(gameConfig.window().title(), gameConfig.window().width(), gameConfig.window().height());
+        gameWindow = new GameWindow(gameConfig.window().title(), gameConfig.window().width(), gameConfig.window().height(), gameConfig.application().minMillisBetweenKeyPressedEvents());
 
         setupKeyPressedHandler();
         setupWindowClosedHandler();

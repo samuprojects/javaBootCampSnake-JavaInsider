@@ -1,5 +1,6 @@
 package snake.config;
 
 public record GameConfig(
-        WindowConfig window
+        WindowConfig window,
+        ApplicationConfig application
 ) {}

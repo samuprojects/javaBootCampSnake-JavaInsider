@@ -18,9 +18,9 @@ public class GameWindow {
     private final KeyHandler keyHandler;
     private final WindowHandler windowHandler;
 
-    public GameWindow(String title, int width, int height) {
+    public GameWindow(String title, int width, int height, int keyEventInterval) {
         this.window = new JFrameGameWindow(title, width, height);
-        keyHandler = new KeyHandler(window, 20);
+        keyHandler = new KeyHandler(window, keyEventInterval);
         windowHandler = new WindowHandler(window);
     }
 
