@@ -1,24 +1,25 @@
 package snake.game.scene;
 
+import snake.config.FoodConfig;
+import snake.graphics.basic.Color;
 import snake.graphics.basic.Point;
 import snake.graphics.drawable.Rect;
 
 import static snake.game.util.RandomUtils.random;
-import static snake.graphics.basic.Color.RED;
 
 @SuppressWarnings("ALL")
 public class Food extends Rect {
-    private static final int SIZE = 5;
-
     private final Rect drawingArea;
     private int eatenTimes;
+    private FoodConfig config;
 
-    public Food(Rect drawingArea, Snake snake) {
+    public Food(Rect drawingArea, Snake snake, FoodConfig config) {
         this.drawingArea = drawingArea;
+        this.config = config;
 
         moveToRandomLocation(snake);
-        dimension(SIZE, SIZE);
-        setColor(RED);
+        dimension(config.sizeInPixels(), config.sizeInPixels());
+        setColor(Color.valueOf(config.color()));
     }
 
     public void moveToRandomLocation(Snake snake) {
@@ -26,8 +27,8 @@ public class Food extends Rect {
 
         do {
 
-            int x = random(drawingArea.minX() + distanceFromBorder, drawingArea.maxX() - SIZE - distanceFromBorder);
-            int y = random(drawingArea.minY() + distanceFromBorder, drawingArea.maxY() - SIZE - distanceFromBorder);
+            int x = random(drawingArea.minX() + distanceFromBorder, drawingArea.maxX() - config.sizeInPixels() - distanceFromBorder);
+            int y = random(drawingArea.minY() + distanceFromBorder, drawingArea.maxY() - config.sizeInPixels() - distanceFromBorder);
 
             location(new Point(x, y));
 

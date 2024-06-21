@@ -2,5 +2,6 @@ package snake.config;
 
 public record GameConfig(
         WindowConfig window,
-        ApplicationConfig application
+        ApplicationConfig application,
+        FoodConfig food
 ) {}
