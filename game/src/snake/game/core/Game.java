@@ -2,31 +2,34 @@ package snake.game.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import snake.config.GameConfig;
+import snake.config.loader.ConfigLoader;
 import snake.game.scene.Background;
 import snake.game.scene.Food;
 import snake.game.scene.GameOverText;
 import snake.game.scene.Snake;
+import snake.graphics.basic.Color;
 import snake.graphics.window.GameWindow;
-
-import static snake.graphics.basic.Color.BLACK;
 
 @SuppressWarnings("ALL")
 public class Game {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Game.class);
-    public static final int WINDOW_WIDTH = 400;
-    public static final int WINDOW_HEIGHT = 400;
-    private static final String WINDOW_TITLE = "Snake!";
     private static final int MAX_SNAKE_SPEED = 50;
 
     private GameWindow gameWindow;
     private Snake snake;
     private Food food;
+    private GameConfig gameConfig;
     private volatile boolean running;
 
     public void start () {
         LOGGER.debug("Starting the game....");
-        gameWindow = new GameWindow(WINDOW_TITLE, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+        gameConfig = ConfigLoader.load();
+        LOGGER.debug("Game config loaded: {}" + gameConfig);
+
+        gameWindow = new GameWindow(gameConfig.window().title(), gameConfig.window().width(), gameConfig.window().height());
 
         setupKeyPressedHandler();
         setupWindowClosedHandler();
@@ -53,7 +56,7 @@ public class Game {
 
     private void addElementsToScreen() {
         gameWindow.addDrawable(
-                new Background(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK)
+                new Background(gameConfig.window().width(), gameConfig.window().height(), Color.valueOf(gameConfig.window().backgroundColor()))
         );
 
         snake = new Snake();
