@@ -92,7 +92,7 @@ public class Game {
     private void processGameOver() {
         gameWindow.removeDrawable(snake);
         gameWindow.removeDrawable(food);
-        gameWindow.addDrawable(new GameOverText(food.getEatenTimes()));
+        gameWindow.addDrawable(new GameOverText(food.getEatenTimes(), gameConfig.window(), gameConfig.gameOver()));
         gameWindow.update();
     }
 

@@ -11,5 +11,13 @@
   "food": {
     "sizeInPixels": 15,
     "color": "RED"
+  },
+  "gameOver": {
+    "textTemplate": "GAME OVER! %d PONTO(S)",
+    "color": "RED",
+    "positionOffset": {
+      "x": -80,
+      "y": 0
+    }
   }
 }
