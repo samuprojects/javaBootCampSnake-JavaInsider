@@ -59,7 +59,7 @@ public class Game {
                 new Background(gameConfig.window().width(), gameConfig.window().height(), Color.valueOf(gameConfig.window().backgroundColor()))
         );
 
-        snake = new Snake();
+        snake = new Snake(gameConfig.snake());
         gameWindow.addDrawable(snake );
 
         food = new Food(gameWindow.drawingArea(), snake, gameConfig.food());

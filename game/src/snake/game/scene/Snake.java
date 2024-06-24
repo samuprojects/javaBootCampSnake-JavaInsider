@@ -2,40 +2,43 @@ package snake.game.scene;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import snake.config.SnakeConfig;
 import snake.game.core.Direction;
+import snake.graphics.basic.Color;
 import snake.graphics.basic.Dimension;
 import snake.graphics.basic.Point;
 import snake.graphics.drawable.Rect;
 import snake.graphics.drawable.Shape;
 
 import static snake.game.core.Direction.*;
-import static snake.graphics.basic.Color.WHITE;
 
 @SuppressWarnings("ALL")
 public class Snake extends Shape {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Snake.class);
-    private static final int PIECE_SIZE = 5;
+
+    private final   SnakeConfig config;
 
     private Direction direction;
     private int piecesToElongate;
     private int speed;
 
-    public Snake() {
-        super(WHITE);
+    public Snake(SnakeConfig config) {
+        super(Color.valueOf(config.color()));
 
+        this.config = config;
         direction = NONE;
         speed = 10;
 
-        Point p = new Point(200, 100);
-        Dimension d = new Dimension(PIECE_SIZE, PIECE_SIZE);
+        Point p = new Point(config.initialPosition().x(), config.initialPosition().y());
+        Dimension d = new Dimension(config.pieceSizeInPixels(), config.pieceSizeInPixels());
 
         Rect rect = new Rect(p, d);
         addRect(rect);
 
         Point direction = new Point(-1, 0);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < config.initialPieces(); i++) {
             rect = duplicateRect(rect, direction);
             addRect(rect);
         }
@@ -59,11 +62,11 @@ public class Snake extends Shape {
 
     public void elongate() {
         LOGGER.debug("Elongating...");
-        piecesToElongate = 5;
+        piecesToElongate = config.elongatePieces();
     }
 
     public void faster(){
-        speed += 5;
+        speed += config.incrementSpeed();
         LOGGER.debug("Faster! {}", speed);
     }
 
@@ -102,7 +105,7 @@ public class Snake extends Shape {
     public boolean collidedWithWindowBounds(Rect drawingArea) {
         boolean collided = false;
 
-        int pieceSize = PIECE_SIZE;
+        int pieceSize = config.pieceSizeInPixels();
         Rect head = firstRect();
 
         int headX = head.location().x();

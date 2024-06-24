@@ -4,5 +4,6 @@ public record GameConfig(
         WindowConfig window,
         ApplicationConfig application,
         FoodConfig food,
-        GameOverConfig gameOver
+        GameOverConfig gameOver,
+        SnakeConfig snake
 ) {}
